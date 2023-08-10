@@ -1,25 +1,10 @@
 /**
  * FizzBuzz without logical operations.
- * So there are no conditions and no loops.
- * Only "write" function is used from stdlib.
- * It's so ugle, I love it <3
- *
- * Compile and run:
- *
- *	$ cc -o fizzbuzz fizzbuzz.c
- *	$ ./fizzbuzz
- *	1
- *	2
- *	fizz
- *	...
+ * v2.0 from https://github.com/ir33k/fizzbuzz
  */
 
-#define TEN(a) a;a;a;a;a;a;a;a;a;a; /* Same instruction  10 times */
-#define HUNDRED(a) TEN(TEN(a))      /* Same instruction 100 times */
-
-/* FizzBuzz is a pattern that repeats every 15 values. */
-char *pattern[15] = { "", "", "fizz", "", "buzz", "fizz", "",
-	"", "fizz", "buzz", "", "fizz", "", "", "fizzbuzz" };
+#define TEN(a) a;a;a;a;a;a;a;a;a;a; /* Repeat instruction  10 times */
+#define HUNDRED(a) TEN(TEN(a))      /* Repeat instruction 100 times */
 
 /* Return 1 if NUM is 0, otherwise return 0. */
 int
@@ -55,10 +40,13 @@ sput(char *str)
 int
 main(void)
 {
+	char *fizz[3] = {"fizz", "", ""};
+	char *buzz[5] = {"buzz", "", "", "", ""};
 	int i=0;
 	HUNDRED(sput(utoa(++i));
 		sput("\r");	/* Magic */
-		sput(pattern[(i-1)%15]);
+		sput(fizz[i%3]);
+		sput(buzz[i%5]);
 		sput("\n"))
 	return 0;
 }
